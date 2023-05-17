@@ -1,6 +1,6 @@
 # KtorSandwichWrapper
 
-#wrapper for Sandwhich https://github.com/skydoves/sandwich 
+#wrapper for Sandwich https://github.com/skydoves/sandwich 
 #where the requests are made from the Ktor HttpClient rather than a retrofit instance
 
 ### to use copy the KtorSandwhich Module into the root project directory 
