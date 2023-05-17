@@ -5,6 +5,8 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.Headers
 import io.silv.ktorsandwhich.operators.ApiResponseOperator
 import io.silv.ktorsandwhich.operators.ApiResponseSuspendOperator
+import io.silv.ktorsandwich.operator
+import io.silv.ktorsandwich.suspendOperator
 import kotlinx.coroutines.launch
 
 

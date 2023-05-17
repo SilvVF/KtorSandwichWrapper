@@ -3,9 +3,6 @@ package io.silv.ktorsandwhich
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
@@ -22,9 +19,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import io.silv.ktorsandwhich.client.KSandwichClient
-import io.silv.ktorsandwhich.client.get
+import io.silv.ktorsandwich.client.KSandwichClient
+import io.silv.ktorsandwich.client.get
 import io.silv.ktorsandwhich.ui.theme.KtorSandwhichTheme
+import io.silv.ktorsandwich.message
+import io.silv.ktorsandwich.suspendOnFailure
+import io.silv.ktorsandwich.suspendOnSuccess
 import kotlinx.coroutines.launch
 
 

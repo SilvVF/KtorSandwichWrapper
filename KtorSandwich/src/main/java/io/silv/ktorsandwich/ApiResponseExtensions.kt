@@ -16,6 +16,8 @@
 
 package io.silv.ktorsandwhich
 
+import io.silv.ktorsandwich.message
+
 /**
  * @author skydoves (Jaewoong Eum)
  * @since 1.3.1

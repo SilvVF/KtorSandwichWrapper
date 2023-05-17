@@ -18,8 +18,11 @@
 @file:JvmName("ResponseTransformer")
 @file:JvmMultifileClass
 
-package io.silv.ktorsandwhich
+package io.silv.ktorsandwich
 
+import io.silv.ktorsandwhich.ApiErrorModelMapper
+import io.silv.ktorsandwhich.ApiResponse
+import io.silv.ktorsandwhich.ApiSuccessModelMapper
 import io.silv.ktorsandwhich.operators.ApiResponseOperator
 import io.silv.ktorsandwhich.operators.ApiResponseSuspendOperator
 import kotlinx.coroutines.flow.Flow
@@ -40,6 +43,7 @@ public fun <T> ApiResponse<T>.getOrNull(): T? {
     is ApiResponse.Success -> data
     is ApiResponse.Failure.Error -> null
     is ApiResponse.Failure.Exception -> null
+    else -> null
   }
 }
 
@@ -56,6 +60,7 @@ public fun <T> ApiResponse<T>.getOrElse(defaultValue: T): T {
     is ApiResponse.Success -> data
     is ApiResponse.Failure.Error -> defaultValue
     is ApiResponse.Failure.Exception -> defaultValue
+    else -> defaultValue
   }
 }
 
@@ -72,6 +77,7 @@ public inline fun <T> ApiResponse<T>.getOrElse(defaultValue: () -> T): T {
     is ApiResponse.Success -> data
     is ApiResponse.Failure.Error -> defaultValue()
     is ApiResponse.Failure.Exception -> defaultValue()
+    else -> defaultValue()
   }
 }
 
@@ -91,6 +97,7 @@ public fun <T> ApiResponse<T>.getOrThrow(): T {
     is ApiResponse.Success -> return data
     is ApiResponse.Failure.Error -> throw RuntimeException(message())
     is ApiResponse.Failure.Exception -> throw exception
+    else -> throw IllegalStateException()
   }
 }
 
@@ -582,6 +589,7 @@ public fun <T> ApiResponse.Failure<T>.message(): String {
   return when (this) {
     is ApiResponse.Failure.Error -> message()
     is ApiResponse.Failure.Exception -> message()
+    else -> message()
   }
 }
 
@@ -616,6 +624,7 @@ public fun <T, V : ApiResponseOperator<T>> ApiResponse<T>.operator(
     is ApiResponse.Success -> apiResponseOperator.onSuccess(this)
     is ApiResponse.Failure.Error -> apiResponseOperator.onError(this)
     is ApiResponse.Failure.Exception -> apiResponseOperator.onException(this)
+    else -> Unit
   }
 }
 
@@ -634,6 +643,7 @@ public suspend fun <T, V : ApiResponseSuspendOperator<T>> ApiResponse<T>.suspend
     is ApiResponse.Success -> apiResponseOperator.onSuccess(this)
     is ApiResponse.Failure.Error -> apiResponseOperator.onError(this)
     is ApiResponse.Failure.Exception -> apiResponseOperator.onException(this)
+    else -> {}
   }
 }
 

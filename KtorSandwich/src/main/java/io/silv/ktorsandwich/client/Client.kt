@@ -1,9 +1,6 @@
-package io.silv.ktorsandwhich.client
+package io.silv.ktorsandwich.client
 
 import io.ktor.client.HttpClient
-import io.ktor.client.HttpClientConfig
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.patch
@@ -29,47 +26,37 @@ internal class KSandwichClientImpl: KSandwichClient {
 
     override val client = HttpClient(
         KSandwichInitializer.engineFactory {}
-    ) {
-
-    }
-
+    )
 }
 
 suspend inline fun <reified T> KSandwichClient.get(
     urlString: String,
     crossinline block: HttpRequestBuilder.() -> Unit = {}
 ): ApiResponse<T> {
-    return client.getApiResponse(urlString, block)
+    return ApiResponse.of { client.get(urlString, block) }
 }
 
 suspend inline fun <reified T> KSandwichClient.post(
     urlString: String,
-    block: HttpRequestBuilder.() -> Unit = {}
+    crossinline block: HttpRequestBuilder.() -> Unit = {}
 ): ApiResponse<T> {
-    val response = client.post(urlString, block)
-    return ApiResponse.of { response }
+    return ApiResponse.of { client.post(urlString, block) }
 }
 
 suspend inline fun <reified T> KSandwichClient.put(
     urlString: String,
-    block: HttpRequestBuilder.() -> Unit = {}
+    crossinline block: HttpRequestBuilder.() -> Unit = {}
 ): ApiResponse<T> {
-    val response = client.put(urlString, block)
-    return ApiResponse.of { response }
+    return ApiResponse.of { client.put(urlString, block) }
 }
 
 suspend inline fun <reified T> KSandwichClient.patch(
     urlString: String,
-    block: HttpRequestBuilder.() -> Unit = {}
+    crossinline block: HttpRequestBuilder.() -> Unit = {}
 ): ApiResponse<T> {
-    val response = client.patch(urlString, block)
-    return ApiResponse.of { response }
+    return ApiResponse.of { client.patch(urlString, block) }
 }
 
 
-suspend inline fun <reified T> HttpClient.getApiResponse(
-    urlString: String, crossinline block: HttpRequestBuilder.() -> Unit
-): ApiResponse<T> {
-    return ApiResponse.of { get(urlString, block) }
-}
+
 
