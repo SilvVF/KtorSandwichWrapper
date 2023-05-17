@@ -3,7 +3,9 @@
 #wrapper for Sandwhich https://github.com/skydoves/sandwich 
 #where the requests are made from the Ktor HttpClient rather than a retrofit instance
 
-### to use copy the KtorSandwhich Module into the root project directory and add implementation(project(":KtorSandwhich")) to the app build.gradle file. This module relies on inline functions and will only work if the target JVM matches that of the app module
+### to use copy the KtorSandwhich Module into the root project directory 
+### add implementation(project(":KtorSandwhich")) to the app build.gradle file. 
+### This module relies on inline functions and will only work if the target JVM matches that of the app module
 
 
 ## Basic Usage
