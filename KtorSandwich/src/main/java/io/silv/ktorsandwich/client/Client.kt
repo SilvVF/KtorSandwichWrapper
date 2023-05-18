@@ -1,61 +1,54 @@
 package io.silv.ktorsandwich.client
 
 import io.ktor.client.HttpClient
-import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.get
-import io.ktor.client.request.patch
-import io.ktor.client.request.post
-import io.ktor.client.request.put
-import io.silv.ktorsandwhich.ApiResponse
-import io.silv.ktorsandwhich.KSandwichInitializer
+import io.ktor.client.engine.HttpClientEngineConfig
+import io.ktor.client.engine.HttpClientEngineFactory
+import io.silv.ktorsandwich.operators.SandwichOperator
+import io.silv.ktorsandwich.KSandwichInitializer
 
 
 interface KSandwichClient {
 
     val client: HttpClient
 
+    fun engine(
+        engineFactory: HttpClientEngineFactory<HttpClientEngineConfig>,
+        engineConfig:  HttpClientEngineFactory<HttpClientEngineConfig>.() -> Unit,
+    )
+
+
+    fun addGlobalOperator(operator: SandwichOperator)
+
     companion object {
 
-        fun create(): KSandwichClient {
-            return KSandwichClientImpl()
+        fun create(block: KSandwichClient.() -> Unit): KSandwichClient {
+            return KSandwichClientImpl().apply(block)
         }
     }
 }
 
 internal class KSandwichClientImpl: KSandwichClient {
 
+
     override val client = HttpClient(
-        KSandwichInitializer.engineFactory {}
+        KSandwichInitializer.engineFactory.apply(
+            KSandwichInitializer.engineConfig
+        )
     )
+
+    override fun engine(
+        engineFactory: HttpClientEngineFactory<HttpClientEngineConfig>,
+        engineConfig: HttpClientEngineFactory<HttpClientEngineConfig>.() -> Unit
+    ) {
+        KSandwichInitializer.engineFactory = engineFactory
+        KSandwichInitializer.engineConfig = engineConfig
+    }
+
+    override fun addGlobalOperator(operator: SandwichOperator) {
+        KSandwichInitializer.sandwichOperators += operator
+    }
 }
 
-suspend inline fun <reified T> KSandwichClient.get(
-    urlString: String,
-    crossinline block: HttpRequestBuilder.() -> Unit = {}
-): ApiResponse<T> {
-    return ApiResponse.of { client.get(urlString, block) }
-}
-
-suspend inline fun <reified T> KSandwichClient.post(
-    urlString: String,
-    crossinline block: HttpRequestBuilder.() -> Unit = {}
-): ApiResponse<T> {
-    return ApiResponse.of { client.post(urlString, block) }
-}
-
-suspend inline fun <reified T> KSandwichClient.put(
-    urlString: String,
-    crossinline block: HttpRequestBuilder.() -> Unit = {}
-): ApiResponse<T> {
-    return ApiResponse.of { client.put(urlString, block) }
-}
-
-suspend inline fun <reified T> KSandwichClient.patch(
-    urlString: String,
-    crossinline block: HttpRequestBuilder.() -> Unit = {}
-): ApiResponse<T> {
-    return ApiResponse.of { client.patch(urlString, block) }
-}
 
 
 

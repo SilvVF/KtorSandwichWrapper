@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("RedundantVisibilityModifier", "unused")
+package io.silv.ktorsandwich.operators
 
-package io.silv.ktorsandwhich.operators
-
-import io.silv.ktorsandwhich.ApiResponse
+import io.silv.ktorsandwich.ApiResponse
 
 
 /**
  * @author skydoves (Jaewoong Eum)
  *
  * ApiResponseSuspendOperator operates on an [ApiResponse] which should be handled in the suspension scope.
- * This allows you to handle success and error response instead of the [com.skydoves.sandwich.suspendOnSuccess],
- * [com.skydoves.sandwich.suspendOnError], [com.skydoves.sandwich.suspendOnException] transformers.
+ * This allows you to handle success and error response instead of the [io.silv.ktorsandwich.suspendOnSuccess],
+ * [io.silv.ktorsandwich.suspendOnError], [io.silv.ktorsandwich.suspendOnException] transformers.
  * This operator can be applied globally as a singleton instance, or on each [ApiResponse] one by one.
  */
 public abstract class ApiResponseSuspendOperator<T> : SandwichOperator {

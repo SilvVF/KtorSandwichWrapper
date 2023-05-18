@@ -16,14 +16,14 @@
 
 @file:Suppress("unused")
 
-package io.silv.ktorsandwhich
+package io.silv.ktorsandwich
 
 /**
  * @author skydoves (Jaewoong Eum)
  *
  * This is a list of Hypertext Transfer Protocol (HTTP) response status codes.
  */
-public enum class StatusCode(public val code: Int) {
+enum class StatusCode(val code: Int) {
   Unknown(0),
 
   Continue(100),

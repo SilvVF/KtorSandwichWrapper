@@ -16,6 +16,8 @@
 
 package io.silv.ktorsandwhich
 
+import io.silv.ktorsandwich.ApiResponse
+
 /**
  * @author skydoves (Jaewoong Eum)
  *
@@ -23,7 +25,7 @@ package io.silv.ktorsandwhich
  *
  * @see [ApiErrorModelMapper](https://github.com/skydoves/sandwich#apierrormodelmapper)
  */
-public fun interface ApiErrorModelMapper<V> {
+fun interface ApiErrorModelMapper<V> {
 
   /**
    * maps the [ApiResponse.Failure.Error] to the [V] using the mapper.
@@ -31,5 +33,5 @@ public fun interface ApiErrorModelMapper<V> {
    * @param apiErrorResponse The [ApiResponse.Failure.Error] error response from the network request.
    * @return A custom [V] error response model.
    */
-  public fun map(apiErrorResponse: ApiResponse.Failure.Error<*>): V
+  fun map(apiErrorResponse: ApiResponse.Failure.Error<*>): V
 }

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package io.silv.ktorsandwhich.operators
+package io.silv.ktorsandwich.operators
 
 /**
  * @author skydoves (Jaewoong Eum)
  *
- * An interface of Operator which operates on an [ApiResponse] which should be handled.
+ * An interface of Operator which operates on an [io.silv.ktorsandwich.ApiResponse] which should be handled.
  */
-public interface SandwichOperator
+interface SandwichOperator

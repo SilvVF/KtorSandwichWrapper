@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("RedundantVisibilityModifier")
 
-package io.silv.ktorsandwhich.operators
+package io.silv.ktorsandwich.operators
 
-import io.silv.ktorsandwhich.ApiResponse
+import io.silv.ktorsandwich.ApiResponse
 
 
 /**
  * @author skydoves (Jaewoong Eum)
  *
  * ApiResponseOperator operates on an [ApiResponse] and return an [ApiResponse].
- * This allows you to handle success and error response instead of the [com.skydoves.sandwich.onSuccess],
- * [com.skydoves.sandwich.onError], [com.skydoves.sandwich.onException] transformers.
+ * This allows you to handle success and error response instead of the [onSuccess],
+ * [onError], [onException] transformers.
  * This operator can be applied globally as a singleton instance, or on each [ApiResponse] one by one.
  */
 public abstract class ApiResponseOperator<T> : SandwichOperator {

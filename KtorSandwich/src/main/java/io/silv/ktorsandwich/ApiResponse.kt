@@ -1,16 +1,16 @@
-package io.silv.ktorsandwhich
+@file:Suppress("unused", "RedundantVisibilityModifier")
+
+package io.silv.ktorsandwich
 
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.Headers
-import io.silv.ktorsandwhich.operators.ApiResponseOperator
-import io.silv.ktorsandwhich.operators.ApiResponseSuspendOperator
-import io.silv.ktorsandwich.operator
-import io.silv.ktorsandwich.suspendOperator
+import io.silv.ktorsandwich.operators.ApiResponseOperator
+import io.silv.ktorsandwich.operators.ApiResponseSuspendOperator
 import kotlinx.coroutines.launch
 
 
-public sealed class ApiResponse<out T> {
+sealed class ApiResponse<out T> {
 
     data class Success<T>(
         private val response: HttpResponse,
@@ -65,7 +65,7 @@ public sealed class ApiResponse<out T> {
         /**
          * @author skydoves (Jaewoong Eum)
          *
-         * Operates if there is a global [com.skydoves.sandwich.operators.SandwichOperator]
+         * Operates if there is a global [io.silv.ktorsandwich.operators.SandwichOperator]
          * which operates on [ApiResponse]s globally on each response and returns the target [ApiResponse].
          *
          * @return [ApiResponse] A target [ApiResponse].

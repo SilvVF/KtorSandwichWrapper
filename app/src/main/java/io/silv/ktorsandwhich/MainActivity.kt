@@ -28,10 +28,16 @@ import io.silv.ktorsandwich.suspendOnSuccess
 import kotlinx.coroutines.launch
 
 
-val client: KSandwichClient = KSandwichClient.create()
-
 class MainActivity : ComponentActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val globalOperator = GlobalOperator<Any>(application)
+        val client: KSandwichClient = KSandwichClient.create {
+            addGlobalOperator(globalOperator)
+        }
+
         super.onCreate(savedInstanceState)
         setContent {
 

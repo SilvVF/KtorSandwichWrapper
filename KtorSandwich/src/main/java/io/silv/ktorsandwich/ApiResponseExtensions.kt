@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:Suppress("unused")
 
-package io.silv.ktorsandwhich
+package io.silv.ktorsandwich
 
-import io.silv.ktorsandwich.message
 
 /**
  * @author skydoves (Jaewoong Eum)
@@ -24,7 +24,7 @@ import io.silv.ktorsandwich.message
  *
  *  Returns true if this instance represents an [ApiResponse.Success].
  */
-public inline val ApiResponse<Any>.isSuccess: Boolean
+inline val ApiResponse<Any>.isSuccess: Boolean
   get() = this is ApiResponse.Success
 
 /**
@@ -33,16 +33,15 @@ public inline val ApiResponse<Any>.isSuccess: Boolean
  *
  *  Returns true if this instance represents an [ApiResponse.Failure].
  */
-public inline val ApiResponse<Any>.isFailure: Boolean
+inline val ApiResponse<Any>.isFailure: Boolean
   get() = this is ApiResponse.Failure
-
 /**
  * @author skydoves (Jaewoong Eum)
  * @since 1.3.1
  *
  *  Returns true if this instance represents an [ApiResponse.Failure.Error].
  */
-public inline val ApiResponse<Any>.isError: Boolean
+inline val ApiResponse<Any>.isError: Boolean
   get() = this is ApiResponse.Failure.Error
 
 /**
@@ -51,7 +50,7 @@ public inline val ApiResponse<Any>.isError: Boolean
  *
  *  Returns true if this instance represents an [ApiResponse.Failure.Exception].
  */
-public inline val ApiResponse<Any>.isException: Boolean
+inline val ApiResponse<Any>.isException: Boolean
   get() = this is ApiResponse.Failure.Exception
 
 /**
@@ -60,7 +59,7 @@ public inline val ApiResponse<Any>.isException: Boolean
  *
  *  Returns The error message or null depending on the type of [ApiResponse].
  */
-public inline val ApiResponse<Any>.messageOrNull: String?
+inline val ApiResponse<Any>.messageOrNull: String?
   get() = when (this) {
     is ApiResponse.Failure.Error -> message()
     is ApiResponse.Failure.Exception -> message

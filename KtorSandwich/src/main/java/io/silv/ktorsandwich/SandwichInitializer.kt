@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.silv.ktorsandwhich
+@file:Suppress("RedundantVisibilityModifier", "unused")
+package io.silv.ktorsandwich
 
 import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.engine.HttpClientEngineFactory
 import io.ktor.client.engine.cio.CIO
-import io.silv.ktorsandwhich.operators.SandwichOperator
+import io.silv.ktorsandwich.operators.SandwichOperator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import okio.Timeout
 
 /**
  * @author skydoves (Jaewoong Eum)
@@ -45,36 +44,19 @@ public object KSandwichInitializer {
   @JvmStatic
   public var successCodeRange: IntRange = 200..299
 
-  public fun engineFactory(
-    config: HttpClientEngineFactory<HttpClientEngineConfig>.() -> Unit
-  ): HttpClientEngineFactory<HttpClientEngineConfig> = CIO.apply(config)
+  var engineFactory: HttpClientEngineFactory<HttpClientEngineConfig> = CIO
 
-  /**
-   * @author skydoves (Jaewoong Eum)
-   *
-   * A global Operator that operates on [ApiResponse]s globally on each response.
-   *
-   * [com.skydoves.sandwich.operators.ApiResponseOperator] which allows you to handle success and error response instead of
-   * the [ApiResponse.onSuccess], [ApiResponse.onError], [ApiResponse.onException] transformers.
-   * [com.skydoves.sandwich.operators.ApiResponseSuspendOperator] can be used for suspension scope.
-   *
-   * Via setting a [sandwichOperator], we don't need to set operator for every [ApiResponse].
-   */
-  @Deprecated(
-    message = "sandwichOperator has been deprecated. Use `sandwichOperators` instead.",
-    replaceWith = ReplaceWith(expression = "SandwichInitializer.sandwichOperators")
-  )
-  @JvmStatic
-  public var sandwichOperator: SandwichOperator? = null
+  var engineConfig: HttpClientEngineFactory<HttpClientEngineConfig>.() -> Unit = { }
+
 
   /**
    * @author skydoves (Jaewoong Eum)
    *
    * A list of global operators that is executed by [ApiResponse]s globally on each response.
    *
-   * [com.skydoves.sandwich.operators.ApiResponseOperator] which allows you to handle success and error response instead of
+   * [io.silv.ktorsandwich.operators.ApiResponseOperator] which allows you to handle success and error response instead of
    * the [ApiResponse.onSuccess], [ApiResponse.onError], [ApiResponse.onException] transformers.
-   * [com.skydoves.sandwich.operators.ApiResponseSuspendOperator] can be used for suspension scope.
+   * [io.silv.ktorsandwich.operators.ApiResponseSuspendOperator] can be used for suspension scope.
    *
    * Via setting [sandwichOperators], you don't need to set operator for every [ApiResponse].
    */
@@ -88,16 +70,4 @@ public object KSandwichInitializer {
    */
   @JvmSynthetic
   public var sandwichScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-
-  /**
-   * @author skydoves (Jaewoong Eum)
-   *
-   * A global [Timeout] for operating the [com.skydoves.sandwich.adapters.ApiResponseCallAdapterFactory].
-   *
-   * Returns a timeout that spans the entire call: resolving DNS, connecting, writing the request
-   * body, server processing, and reading the response body. If the call requires redirects or
-   * retries all must complete within one timeout period.
-   */
-  @JvmStatic
-  public var sandwichTimeout: Timeout? = null
 }
