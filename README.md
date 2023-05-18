@@ -22,6 +22,6 @@ val client: KSandwichClient = KSandwichClient.create()
 
 these operate equivalent to the ktor HttpClient Methods 
 All of the methods will return and ApiResponse that is almost equivalent to the one from Sandwhich.
-The ApiResponse has many extension funcitons available to it that can help when handle api responses. 
+The ApiResponse has many extension funcitons available to it that can help when handling api responses. 
 
 to see all of the extension go to KtorSandwich/io/silv/ktorsandwich/ApiResponseExtensions
