@@ -14,13 +14,13 @@
 val client: KSandwichClient = KSandwichClient.create()
 ```
 
-# the KSandwhich has four extension functions available for making network calls.
+## the KSandwhich has four extension functions available for making network calls.
 .post()
 .put()
 .get()
 .patch()
 
-#The client engine can be changed and will use Ktor CIO by default with no additional config
+## The client engine can be changed and will use Ktor CIO by default with no additional config
 this can also be changed through the KSandwhichInitializer object
 
 #Global response operators
